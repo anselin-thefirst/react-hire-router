@@ -17,6 +17,11 @@ export default function App() {
       return person})))
   }, []);
 
+  const hirePerson = (person, wage) => {
+    person.wage = wage;
+    setHiredPeople([...hiredPeople, person]);
+  }
+
   return (
     <>
       <header>
@@ -29,7 +34,7 @@ export default function App() {
       </header>
       <Routes>
         <Route path='/' element={<Dashboard hiredPeople={hiredPeople} people={people} />}/>
-        <Route path='/view/:id' element={<PersonProfile people={people}/>}/>
+        <Route path='/view/:id' element={<PersonProfile people={people} hirePerson={hirePerson}/>}/>
       </Routes>
     </>
   )
