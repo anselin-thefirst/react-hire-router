@@ -3,6 +3,7 @@ import './App.css'
 import { Link, Route, Routes, useNavigate } from 'react-router-dom'
 import Dashboard from './pages/Dashboard';
 import PersonProfile from './pages/PersonProfile';
+import EditForm from './pages/PersonProfile/components/EditForm';
 
 export default function App() {
   const [hiredPeople, setHiredPeople] = useState([]);
@@ -22,6 +23,15 @@ export default function App() {
     setHiredPeople([...hiredPeople, person]);
   }
 
+  const updateWage = (id, newWage) => {
+    setHiredPeople(hiredPeople.map(person => {
+      if (person.id === id) {
+        return {...person, wage: newWage};
+      }
+      return person;
+    }));
+  }
+
   return (
     <>
       <header>
@@ -35,6 +45,7 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Dashboard hiredPeople={hiredPeople} people={people} />}/>
         <Route path='/view/:id' element={<PersonProfile people={people} hirePerson={hirePerson}/>}/>
+        <Route path='/edit/:id' element={<EditForm hiredPeople={hiredPeople} updateWage={updateWage} />} />
       </Routes>
     </>
   )

@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom"
 
 function PeopleListItem(props) {
-  const { person } = props
+  const { person, isHired } = props
 
   console.log(person)
   return (
@@ -11,6 +11,7 @@ function PeopleListItem(props) {
       </h3>
       {person.wage && <p>Wage: £{person.wage}</p>}
       <Link to={`/view/${person.id}`}>View profile</Link>
+      {isHired && <Link to={`/edit/${person.id}`}> Edit</Link>}
     </li>
   )
 }
